@@ -12,5 +12,6 @@
 <body>
 	${filename} successfuly uploaded by admin/user ${loggedinuser}
 	<a href="<c:url value='/admin/panel-add-photo' />" class="btn btn-primary">upload  photo</a>
+	${mountain.name }
 </body>
 </html>

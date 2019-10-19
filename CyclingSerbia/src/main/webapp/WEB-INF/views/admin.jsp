@@ -23,6 +23,8 @@
 				<a href="<c:url value='/admin/panel-add-photo' />" class="btn btn-primary">upload  photo</a>
 				<a href="<c:url value='/admin/panel-show-all-photos' />" class="btn btn-primary">Show all photos</a>
 				<a href="<c:url value='/admin/panel-list-all-users' />" class="btn btn-primary">show all users</a>
+				<a href="<c:url value='/mountain/new-mountain' />" class="btn btn-primary">create new mountain</a>
+				<a href="<c:url value='/mountain/show-all-mountains' />" class="btn btn-primary">Show all mountains</a>
 			</div>
 		</div>
 	</div>

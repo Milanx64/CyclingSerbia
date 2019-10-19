@@ -4,8 +4,6 @@ import java.io.IOException;
 
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +22,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 import com.springmvc.model.FileBucket;
@@ -147,6 +144,7 @@ public class AdminController {
 		return "success";
 	}
 	
+	
 	//Access denied page
 	@RequestMapping( value = "/access-denied", method = RequestMethod.GET)
 	public String accessDeniedPage(ModelMap model) {
@@ -154,27 +152,6 @@ public class AdminController {
 		return "access-denied";
 	}
 	
-	// if user is logen in
-	@RequestMapping(value = "/login", method = RequestMethod.GET)
-	public String loginPage() {
-		if(isCurrentAuthenticationAnonymous()) {
-			return "login";
-		}
-		else {
-			return "redirect:/admin";
-		}
-	}
-	//Logout request
-	@RequestMapping(value = "/logout", method = RequestMethod.GET)
-	public String logoutPage(HttpServletRequest request, HttpServletResponse response) {
-		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		if(auth != null) {
-			persistentTokenBaseRememberMeService.logout(request, response, auth);
-			SecurityContextHolder.getContext().setAuthentication(null);
-		}
-		
-		return "redirect:/login?logout";
-	}
 	
 	//Method that provides form for photo upload
 	@RequestMapping(value = "/panel-add-photo", method = RequestMethod.GET)
@@ -264,6 +241,7 @@ public class AdminController {
 		return username;
 	}
 	
+	@SuppressWarnings("unused")
 	private boolean isCurrentAuthenticationAnonymous() {
 		final Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		return authenticationTrustResolver.isAnonymous(auth);

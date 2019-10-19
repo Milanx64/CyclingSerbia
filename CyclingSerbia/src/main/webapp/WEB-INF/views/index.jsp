@@ -58,6 +58,6 @@
 		</div>
 		
 	</div>
-	
+	<a href="<c:url value='/admin/panel' />">Admin</a>
 </body>
 </html>

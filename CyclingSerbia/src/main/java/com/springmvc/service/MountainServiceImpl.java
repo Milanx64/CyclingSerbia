@@ -25,4 +25,14 @@ public class MountainServiceImpl implements MountainService{
 		// TODO Auto-generated method stub
 		return (Mountain) dao.findById(id);
 	}
+
+	public void save(Mountain mountain) {
+		// TODO Auto-generated method stub
+		dao.saveMountain(mountain);
+	}
+
+	public void delete(Mountain mountain) {
+		// TODO Auto-generated method stub
+		dao.delete(mountain);
+	}
 }

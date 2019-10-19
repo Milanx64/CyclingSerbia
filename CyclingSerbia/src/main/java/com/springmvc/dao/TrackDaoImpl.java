@@ -8,6 +8,7 @@ import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
+import com.springmvc.model.Mountain;
 import com.springmvc.model.Track;
 
 @Repository("trackDao")
@@ -27,10 +28,10 @@ public class TrackDaoImpl extends AbstractDao<Integer, Track> implements TrackDa
 	}
 
 	@SuppressWarnings("unchecked")
-	public List<Track> findAllTracksOnMountain(String mountain) {
+	public List<Track> findAllTracksOnMountain(Mountain mountain) {
 		// TODO Auto-generated method stub
 		Criteria crit = createEntityCriteria();
-		crit.add(Restrictions.eq("mountain_name", mountain));
+		crit.add(Restrictions.eq("mountain_id", mountain.getId()));
 		crit.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
 		return (List<Track>) crit.list();
 	}
@@ -45,7 +46,7 @@ public class TrackDaoImpl extends AbstractDao<Integer, Track> implements TrackDa
 		delete(track);
 	}
 
-	public void savetrack(Track track) {
+	public void saveTrack(Track track) {
 		// TODO Auto-generated method stub
 		persist(track);
 	}

@@ -21,7 +21,7 @@ public class Track {
 	@Column(name = "description", nullable = false)
 	private String description;
 	
-	@Column(name = "diffculty", nullable = false)
+	@Column(name = "difficulty", nullable = false)
 	private int difficulty;
 	
 	@Column(name = "cost", nullable = false)

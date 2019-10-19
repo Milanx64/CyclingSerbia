@@ -31,7 +31,7 @@ public class Photo {
 	@Column(name = "content", nullable = false)
 	private byte[] content;
 	
-	@Column(name = "base64")
+	@Column(name = "base64", nullable = true)
 	private String base64Encoded;
 	
 	//mapping photo to the user

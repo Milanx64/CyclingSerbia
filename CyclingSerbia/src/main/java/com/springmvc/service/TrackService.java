@@ -2,6 +2,7 @@ package com.springmvc.service;
 
 import java.util.List;
 
+import com.springmvc.model.Mountain;
 import com.springmvc.model.Track;
 
 public interface TrackService {
@@ -9,5 +10,7 @@ public interface TrackService {
 	
 	Track findById(int id);
 	
-	List<Track> findAllTracksOnMountain(String mountain);
+	List<Track> findAllTracksOnMountain(Mountain mountain);
+	
+	void saveTrack(Track track);
 }

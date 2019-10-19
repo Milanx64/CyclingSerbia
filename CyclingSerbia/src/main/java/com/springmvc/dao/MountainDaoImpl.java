@@ -24,12 +24,12 @@ public class MountainDaoImpl extends AbstractDao<Integer, Mountain> implements M
 	}
 
 	public void saveMountain(Mountain mountain) {
-		// TODO Auto-generated method stub
+		persist(mountain);
 		
 	}
 
-	public void delete(Mountain mountan) {
-		// TODO Auto-generated method stub
+	public void delete(Mountain mountain) {
+		delete(mountain);
 		
 	}
 

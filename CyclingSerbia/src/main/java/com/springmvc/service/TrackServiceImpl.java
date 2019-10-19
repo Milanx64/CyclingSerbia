@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.springmvc.dao.TrackDao;
+import com.springmvc.model.Mountain;
 import com.springmvc.model.Track;
 
 @Service("trackService")
@@ -26,9 +27,14 @@ public class TrackServiceImpl implements TrackService{
 		return dao.findById(id);
 	}
 
-	public List<Track> findAllTracksOnMountain(String mountain) {
+	public List<Track> findAllTracksOnMountain(Mountain mountain) {
 		// TODO Auto-generated method stub
 		return dao.findAllTracksOnMountain(mountain);
+	}
+
+	public void saveTrack(Track track) {
+		// TODO Auto-generated method stub
+		dao.saveTrack(track);
 	}
 
 }

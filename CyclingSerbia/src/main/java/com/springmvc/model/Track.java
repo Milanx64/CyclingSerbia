@@ -34,7 +34,7 @@ public class Track {
 	private double length;
 	
 	@ManyToOne(optional = false)
-	@JoinColumn(name = "mountain_id")
+	@JoinColumn(name = "mountain")
 	private Mountain mountain;
 
 	public Integer getId() {

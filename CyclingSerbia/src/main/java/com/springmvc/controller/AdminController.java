@@ -1,12 +1,16 @@
 package com.springmvc.controller;
 
 import java.io.IOException;
-
+import java.io.InputStream;
 import java.util.List;
 
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.security.authentication.AuthenticationTrustResolver;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -22,6 +26,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 import com.springmvc.model.FileBucket;
@@ -182,38 +188,40 @@ public class AdminController {
 	
 	}
 	
+	
 	@RequestMapping(value = "/panel-show-all-photos", method = RequestMethod.GET)
 	public String showAllPhotos(ModelMap model) throws IOException {
-		List<Photo> photos = photoService.findAllPhotos();
-		FileBucket fileBucket;
-		MultipartFile multipartFile;
-		for(Photo photo : photos) {
-			if ( photo != null) {
-				multipartFile = (MultipartFile) photo;
-				
-	            byte[] bytes = multipartFile.getBytes();
-	            photo.setName(multipartFile.getOriginalFilename());
-	            photo.setContent(bytes);
-	            byte[] encodeBase64 =  Base64.encode(bytes);
-	            String base64Encoded = new String(encodeBase64, "UTF-8");
-	            photo.setBase64Encoded(base64Encoded);
-	        }
-		}
+		List<Photo> photos = photoService.findAllPhotos();	
 		model.addAttribute("photos", photos);
 		model.addAttribute("loggedinuser", getPrincipal());
 		return "photo-list";
 	}
 	
+	
+	@RequestMapping(value = "/panel-show-photo-{id}", method = RequestMethod.GET)
+	public void showImage(@PathVariable int id, HttpServletResponse response,HttpServletRequest request) 
+	          throws ServletException, IOException{
 
 
-
+	    Photo photo = photoService.findById(id);        
+	    response.setContentType("image/jpeg, image/jpg, image/png, image/gif");
+	    response.getOutputStream().write(photo.getContent());
+	    response.getOutputStream().close();
+	}
+	
+	@RequestMapping(value = "/panel-delete-photo-{id}", method = RequestMethod.GET)
+	public String deletePhoto(@PathVariable int id, ModelMap model) {
+		Photo p = photoService.findById(id);
+		photoService.deletePhoto(p);
+		model.addAttribute("success", "Photo deleted successfuly");
+		model.addAttribute("loggedinuser", getPrincipal());
+		return "success";
+	}
 	private void savePhoto(FileBucket fileBucket, User admin) throws IOException {
 		Photo photo = new Photo();
 		
 	    MultipartFile multipartFile = fileBucket.getFile();
 	    
-	    
-		
 		photo.setName(multipartFile.getOriginalFilename());
 		photo.setDescription(fileBucket.getDescription());
 		photo.setType(multipartFile.getContentType());

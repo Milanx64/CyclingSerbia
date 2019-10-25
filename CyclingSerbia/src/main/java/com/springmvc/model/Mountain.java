@@ -23,9 +23,14 @@ public class Mountain {
 	@Column(name = "description", nullable = false, length = 255)
 	private String description;
 	
+	//Mapping mountain with tracks
 	@OneToMany(mappedBy = "mountain", cascade = CascadeType.ALL)
 	private List<Track> tracks ;
 
+	/*//Mapping mountain with photos
+	@OneToMany(mappedBy = "mountain", cascade = CascadeType.ALL)
+	private List<Photo> photos;*/
+	
 	public Integer getId() {
 		return id;
 	}
@@ -57,6 +62,14 @@ public class Mountain {
 	public void setTracks(List<Track> tracks) {
 		this.tracks = tracks;
 	}
+
+	/*public List<Photo> getPhotos() {
+		return photos;
+	}
+
+	public void setPhotos(List<Photo> photos) {
+		this.photos = photos;
+	}*/
 	
 	
 }

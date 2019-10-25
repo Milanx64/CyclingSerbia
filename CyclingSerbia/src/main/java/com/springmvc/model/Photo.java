@@ -30,15 +30,17 @@ public class Photo {
 	@Lob @Basic(fetch = FetchType.LAZY)
 	@Column(name = "content", nullable = false)
 	private byte[] content;
-	
-	@Column(name = "base64", nullable = true)
-	private String base64Encoded;
-	
+		
 	//mapping photo to the user
 	@ManyToOne(optional = false)
 	@JoinColumn(name = "user_id")
 	private User user;
-
+	
+	/*//Mapping photo to the mountain
+	@ManyToOne(optional = false)
+	@JoinColumn(name = "mountain_id")
+	private Mountain mountain; */
+	
 	public Integer getId() {
 		return id;
 	}
@@ -87,13 +89,7 @@ public class Photo {
 		this.user = user;
 	}
 
-	public String getBase64Encoded() {
-		return base64Encoded;
-	}
-
-	public void setBase64Encoded(String base64Encoded) {
-		this.base64Encoded = base64Encoded;
-	}
+	
 
 	
 	

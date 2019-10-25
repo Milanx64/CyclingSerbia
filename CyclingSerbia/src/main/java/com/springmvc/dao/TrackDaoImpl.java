@@ -31,7 +31,7 @@ public class TrackDaoImpl extends AbstractDao<Integer, Track> implements TrackDa
 	public List<Track> findAllTracksOnMountain(Mountain mountain) {
 		// TODO Auto-generated method stub
 		Criteria crit = createEntityCriteria();
-		crit.add(Restrictions.eq("mountain_id", mountain.getId()));
+		crit.add(Restrictions.eq("mountain", mountain));
 		crit.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
 		return (List<Track>) crit.list();
 	}

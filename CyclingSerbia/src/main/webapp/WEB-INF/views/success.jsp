@@ -10,8 +10,9 @@
 <title>Insert title here</title>
 </head>
 <body>
+	<%@include file="nav.jsp" %>
 	${filename} successfuly uploaded by admin/user ${loggedinuser}
-	<a href="<c:url value='/admin/panel-add-photo' />" class="btn btn-primary">upload  photo</a>
-	${mountain.name }
+	
+	${success}
 </body>
 </html>

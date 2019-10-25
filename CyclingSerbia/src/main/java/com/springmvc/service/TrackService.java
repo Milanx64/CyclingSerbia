@@ -13,4 +13,6 @@ public interface TrackService {
 	List<Track> findAllTracksOnMountain(Mountain mountain);
 	
 	void saveTrack(Track track);
+	
+	void updateTrack(Track track);
 }

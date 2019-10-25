@@ -11,7 +11,9 @@
     </head>
  
     <body>
+         <%@include file="nav.jsp" %>
         <div id="mainWrapper">
+       
             <div class="login-container">
                 <div class="login-card">
                     <div class="login-form">

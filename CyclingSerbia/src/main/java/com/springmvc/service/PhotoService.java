@@ -17,4 +17,6 @@ public interface PhotoService {
 	Photo findByUser(int user_id);
 	
 	Photo findById(int id);
+	
+	void deletePhoto(Photo p);
 }

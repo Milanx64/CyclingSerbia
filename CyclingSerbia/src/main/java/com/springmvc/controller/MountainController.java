@@ -78,7 +78,10 @@ public class MountainController {
 	@RequestMapping(value = "/edit-mountain-{id}", method = RequestMethod.GET)
 	public String updateMountain(@PathVariable int id, ModelMap model) {
 		Mountain m = mountainService.findById(id);
+		List<Track> t = trackService.findAllTracksOnMountain(m);
+		m.setTracks(t);
 		model.addAttribute("mountain", m);
+		model.addAttribute("track", t);
 		model.addAttribute("edit", true);
 		model.addAttribute("loggedinuser", getPrincipal());
 		return "mountain-reg";
@@ -89,7 +92,7 @@ public class MountainController {
 		if(result.hasErrors()) {
 			return"mountain-reg";
 		}
-		
+		mountainService.updateMountain(mountain);
 		
 		return "success";
 		
@@ -119,8 +122,31 @@ public class MountainController {
 		
 	}
 	
-	public String updateTrack() {
-		return null;
+	@RequestMapping(value = "/show-all-tracks", method = RequestMethod.GET)
+	public String showAllTracks(ModelMap model) {
+		List<Track> tracks = trackService.findAllTracks();
+		model.addAttribute("tracks", tracks);
+		return "track-list";
+		
+	}
+	
+	@RequestMapping(value = "/edit-track-{id}", method = RequestMethod.GET)
+	public String editTrack(@PathVariable int id, ModelMap model) {
+		Track track = trackService.findById(id);
+		model.addAttribute("track", track);
+		model.addAttribute("edit", true);
+		model.addAttribute("loggedinuser".concat(getPrincipal()));
+		return "track-reg";
+		
+	}
+	
+	@RequestMapping(value = "/edit-track-{id}", method = RequestMethod.POST)
+	public String updateTrack(@Valid Track track, BindingResult result, ModelMap model) {
+		if(result.hasErrors()) {
+			return "track-reg";
+		}
+		trackService.updateTrack(track);
+		return "success";
 	}
 	
 	private String getPrincipal() {

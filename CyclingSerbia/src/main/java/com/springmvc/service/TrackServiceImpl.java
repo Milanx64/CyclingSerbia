@@ -37,4 +37,17 @@ public class TrackServiceImpl implements TrackService{
 		dao.saveTrack(track);
 	}
 
+	public void updateTrack(Track track) {
+		// TODO Auto-generated method stub
+		Track t = dao.findById(track.getId());
+		if(t != null) {
+			t.setName(track.getName());
+			t.setDescription(track.getDescription());
+			t.setDifficulty(track.getDifficulty());
+			t.setCost(track.getCost());
+			t.setDuration(track.getDuration());
+			t.setLength(track.getLength());
+		}
+	}
+
 }

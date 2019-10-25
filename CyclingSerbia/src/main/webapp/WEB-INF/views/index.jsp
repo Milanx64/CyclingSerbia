@@ -18,10 +18,11 @@
     </head>
 <body>
 	<div class="container-fluid">
+		<%@include file="nav.jsp" %>
 		<div class="row">
 			<div class="col-sm-12">
-				<h1 class="">Cycling Serbia Home</h1>
-				<button class="btn btn-primary">text</button>
+				
+				
 				<div id="demo" class="carousel slide" data-ride="carousel">
 
 					  <!-- Indicators -->
@@ -30,18 +31,18 @@
 					    <li data-target="#demo" data-slide-to="1"></li>
 					    <li data-target="#demo" data-slide-to="2"></li>
 					  </ul>
-					
-					  <!-- The slideshow -->
-					  <div class="carousel-inner">
-					    <div class="carousel-item active">
-					      <img src="/static/photos/mtb2.jpg" alt="Los Angeles">
-					    </div>
-					    <div class="carousel-item">
-					      <img src="/static/photos/mtb2.jpg" alt="Chicago">
-					    </div>
-					    <div class="carousel-item">
-					      <img src="/static/photos/mtb2.jpg" alt="New York">
-					    </div>
+					  
+						  <!-- The slideshow -->
+						<div class="carousel-inner">
+						    <div class="carousel-item active">
+						      <img src="<c:url value='/static/photos/mtb2.jpg' />" alt="Los Angeles">
+						    </div>
+						    <div class="carousel-item">
+						       <img src="<c:url value='/static/photos/mtb3.jpg' />" alt="Los Angeles">
+						    </div>
+						    <div class="carousel-item">
+						       <img src="<c:url value='/static/photos/planina.jpg' />" alt="Los Angeles">
+						    </div>
 					  </div>
 					
 					  <!-- Left and right controls -->
@@ -53,7 +54,17 @@
 					  </a>
 					
 					</div>
-				
+					<h1 class="center text-serbia">Cycling Serbia</h1>
+					
+					<div class="about">
+						<p class="about-text">Lorem ipsum dolor sit amet 
+						consectetur adipisicing elit. Cupiditate sequi ea
+						 vero tempora earum magni nesciunt, consectetur neque
+						  corrupti at itaque. Provident distinctio hic 
+						  , voluptatem at iste velit neque eum!</p>
+					</div>
+					<hr>
+					<h3 class="center text-serbia" id="destination-text">Places to see</h3>
 			</div>
 		</div>
 		

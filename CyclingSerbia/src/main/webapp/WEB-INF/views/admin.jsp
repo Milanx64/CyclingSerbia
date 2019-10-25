@@ -14,9 +14,10 @@
 </head>
 <body>
 	<h1>Welcome admin ${loggedinuser}</h1>
-	
+	<%@include file="nav.jsp" %>
 	<div class="container">
 		<div class="row">
+		
 			<div class="admin-panel">
 				<a href="<c:url value='/admin/panel-create-new' />" class="btn btn-primary">create new admin</a>
 				<a href="<c:url value='/admin/panel-edit-admin-${user.id}' />" class="btn btn-primary">edit admin</a>

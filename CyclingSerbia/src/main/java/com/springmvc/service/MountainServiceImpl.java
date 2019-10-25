@@ -35,4 +35,13 @@ public class MountainServiceImpl implements MountainService{
 		// TODO Auto-generated method stub
 		dao.delete(mountain);
 	}
+
+	public void updateMountain(Mountain mountain) {
+		// TODO Auto-generated method stub
+		Mountain m = dao.findById(mountain.getId());
+		if(m != null) {
+			m.setName(mountain.getName());
+			m.setDescription(mountain.getDescription());
+		}
+	}
 }

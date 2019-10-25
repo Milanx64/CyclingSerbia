@@ -10,62 +10,50 @@ import com.springmvc.model.Player;
 
 public class Util {
 	
-	/*public static String convertRandomNumberToString(int num) {
+	public static String convertRandomNumberToString(int num) {
 		String pom = null;
 	     switch(num)
 	     {
 	        case 1:
 	        	pom = "A";
+	        	break;
 	        case 2:
 	        	pom = "2";
+	        	break;
 	        case 3:
 	        	pom = "3";
+	        	break;
 	        case 4:
 	        	pom = "4";
+	        	break;
 	        case 5:
 	        	pom = "5";
+	        	break;
 	        case 6:
 	        	pom = "6";
+	        	break;
 	        case 7:
 	        	pom = "7";
+	        	break;
 	        case 8:
 	        	pom = "8";
+	        	break;
 	        case 9:
 	        	pom = "9";
+	        	break;
 	        case 10:
 	        	pom = "10";
+	        	break;
 	        case 11:
 	        	pom = "J";
+	        	break;
 	        case 12:
 	        	pom = "Q";
+	        	break;
 	        case 13:
 	        	pom = "K";
-	        case 14:
-	        	pom = "A";
-	        case 15:
-	        	pom = "2";
-	        case 16:
-	        	pom = "3";
-	        case 17:
-	        	pom = "4";
-	        case 18:
-	        	pom = "5";
-	        case 19:
-	        	pom = "6";
-	        case 20:
-	        	pom = "7";
-	        case 8:
-	        	pom = "8";
-	        case 9:
-	        	pom = "9";
-	        case 10:
-	        	pom = "10";
-	        case 11:
-	        	pom = "J";
-	        case 12:
-	        	pom = "Q";
-	        case 13:
-	        	pom = "K";
+	        	break;
+	       
 	        default:
 	        	System.out.println("Default: Value is: "+num);
 	      }
@@ -123,5 +111,5 @@ public class Util {
 	
 	public static boolean comperePlayerAndHouseScore(Player player, House house) {
 		return true;
-	}*/
+	}
 }

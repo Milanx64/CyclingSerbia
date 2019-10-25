@@ -12,4 +12,6 @@ public interface MountainService {
 	void save(Mountain mountain);
 	
 	void delete(Mountain mountain);
+	
+	void updateMountain(Mountain mountain);
 }

@@ -33,3 +33,17 @@ body, .form-control{
 .custom-width {
     width: 80px !important;
 }
+
+.center{
+	text-align: center;
+}
+.text-serbia{
+	background: lightblue;
+	padding: 0.2em;
+	color: white;
+}
+
+.about-text{
+	    font-size: 3em;
+    text-align: center
+}

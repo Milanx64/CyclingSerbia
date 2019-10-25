@@ -44,4 +44,9 @@ public class PhotoServiceImpl implements PhotoService{
 		// TODO Auto-generated method stub
 		dao.savePhoto(photo);
 	}
+
+	public void deletePhoto(Photo p) {
+		// TODO Auto-generated method stub
+		dao.deletePhoto(p);
+	}
 }

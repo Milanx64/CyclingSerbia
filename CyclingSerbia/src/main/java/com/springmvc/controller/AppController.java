@@ -1,5 +1,7 @@
 package com.springmvc.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
@@ -21,7 +23,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
-
+import com.springmvc.model.Mountain;
+import com.springmvc.model.Photo;
 import com.springmvc.model.User;
 import com.springmvc.service.MountainService;
 import com.springmvc.service.PhotoService;
@@ -58,16 +61,10 @@ public class AppController {
 	protected void initBinder(WebDataBinder binder) {}
 	
 	//To handle request for home page
-	@RequestMapping(value = {"/home", "/"}, method = RequestMethod.GET)
+	@RequestMapping(value = {"/", "/home"}, method = RequestMethod.GET)
 	public String homePage(ModelMap model) {
-		/*//Add photos for carousel
 		List<Photo> photos = photoService.find4Photos();
-		model.addAttribute("curousel-photo", photos);
-		//Add text
-		model.addAttribute("text", "");
-		//Add fore mountains
-		List<Mountain> mountains =  mountainService.findAll();
-		model.addAttribute("mountains", mountains);*/
+		model.addAttribute("photos", photos);
 		return "index";
 	}
 	

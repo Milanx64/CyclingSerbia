@@ -8,6 +8,7 @@
 <title>Insert title here</title>
 </head>
 <body>
+<%@include file="nav.jsp" %>
  Access denied for ${loggedinuser }
 </body>
 </html>

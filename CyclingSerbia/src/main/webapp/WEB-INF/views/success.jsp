@@ -11,7 +11,7 @@
 </head>
 <body>
 	<%@include file="nav.jsp" %>
-	${filename} successfuly uploaded by admin/user ${loggedinuser}
+	
 	
 	${success}
 </body>

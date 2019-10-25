@@ -24,9 +24,6 @@
                 <thead>
                     <tr>
                         <th>Name</th>
-                        <th>Description</th>
-                        
-                        
                         <sec:authorize access="hasRole('ADMIN') or hasRole('DBA')">
                             <th width="100"></th>
                         </sec:authorize>
@@ -40,11 +37,13 @@
                 <c:forEach items="${mountains}" var="mountain">
                     <tr>
                         <td> <a href="<c:url value='/mountain/show-mountain-${mountain.id}' />">${mountain.name}</a></td>
-                        <td>${mountain.description}</td>
+                        <sec:authorize access="hasRole('ADMIN') or hasRole('DBA')">
+                            <td><a href="<c:url value='/admin/panel-add-photo-${mountain.id}' />" class="btn btn-success custom-width">Add Photo</a></td>
+                        </sec:authorize>
                         
                         
                         <sec:authorize access="hasRole('ADMIN') or hasRole('DBA')">
-                            <td><a href="<c:url value='/mountain/edit-mountain-${mountain.id}' />" class="btn btn-success custom-width">edit</a></td>
+                            <td><a href="<c:url value='/mountain/edit-mountain-${mountain.id}' />" class="btn btn-success custom-width">Edit</a></td>
                         </sec:authorize>
                         <sec:authorize access="hasRole('ADMIN') or hasRole('DBA')">
                             <td><a href="<c:url value='/mountain/add-track-${mountain.id}' />" class="btn btn-success custom-width">Add Track</a></td>

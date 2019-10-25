@@ -65,6 +65,13 @@
 					</div>
 					<hr>
 					<h3 class="center text-serbia" id="destination-text">Places to see</h3>
+					<div class="to-see">
+						<c:forEach items="${photos}" var="photo">
+							<div class="img-holder">
+							 	<img alt="not found" src="<c:url value='/admin/panel-show-photo-${photo.id}' />" class="img">
+							</div>
+						</c:forEach>
+					</div>
 			</div>
 		</div>
 		

@@ -27,9 +27,9 @@ public class Mountain {
 	@OneToMany(mappedBy = "mountain", cascade = CascadeType.ALL)
 	private List<Track> tracks ;
 
-	/*//Mapping mountain with photos
+	//Mapping mountain with photos
 	@OneToMany(mappedBy = "mountain", cascade = CascadeType.ALL)
-	private List<Photo> photos;*/
+	private List<Photo> photos;
 	
 	public Integer getId() {
 		return id;
@@ -63,13 +63,13 @@ public class Mountain {
 		this.tracks = tracks;
 	}
 
-	/*public List<Photo> getPhotos() {
+	public List<Photo> getPhotos() {
 		return photos;
 	}
 
 	public void setPhotos(List<Photo> photos) {
 		this.photos = photos;
-	}*/
+	}
 	
 	
 }

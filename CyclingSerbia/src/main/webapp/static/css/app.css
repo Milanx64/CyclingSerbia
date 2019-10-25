@@ -18,11 +18,9 @@ body, .form-control{
 }
  
 .generic-container {
-  position:fixed;
+  
   width:80%;
-  margin-left: 20px;
-  margin-top: 20px;
-  margin-bottom: 20px;
+  margin: 0 auto;
   padding: 20px;
   background-color: #EAE7E7;
   border: 1px solid #ddd;
@@ -31,7 +29,7 @@ body, .form-control{
 }
  
 .custom-width {
-    width: 80px !important;
+    width: 90px !important;
 }
 
 .center{
@@ -39,11 +37,40 @@ body, .form-control{
 }
 .text-serbia{
 	background: lightblue;
+	Raleway: sans-serif;
 	padding: 0.2em;
 	color: white;
+	 box-shadow: 0 0 30px #5f95af;
 }
 
 .about-text{
 	    font-size: 3em;
     text-align: center
+}
+.about-mt{
+	margin: 3em;
+}
+.img-holder{
+	margine-right: 1em;
+}
+.img{
+	float: left;
+	width: 200px;
+	height: 200px;
+	margin-right: 1em;
+    margin-top: 1em;
+}
+#mt{
+	margin-top: 1.3em;
+	margin-botom: 1em;
+	padding: 0.5em;
+}
+
+.mt-about-text{
+	font-size: 2em;
+	Raleway: sans-serif;
+    text-align: justify;
+    background-color: #EAE7E7;
+    padding: 0.5em;
+     box-shadow: 0 0 30px black;
 }

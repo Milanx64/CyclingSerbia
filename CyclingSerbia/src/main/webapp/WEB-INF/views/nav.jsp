@@ -22,7 +22,7 @@
   <div class="collapse navbar-collapse" id="navbarNav">
     <ul class="navbar-nav">
       <li class="nav-item active">
-        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+        <a class="nav-link" href="<c:url value='/' />">Home <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="<c:url value='mountain/show-all-mountains' />">Mountains</a>
@@ -31,7 +31,10 @@
         <a class="nav-link" href="<c:url value='mountain/show-all-tracks' /> ">Tracks</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+        <a class="nav-link" href="<c:url value='/login' />" >Login</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="<c:url value='/logout' />" >Logout</a>
       </li>
     </ul>
   </div>

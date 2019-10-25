@@ -36,11 +36,19 @@ public class Photo {
 	@JoinColumn(name = "user_id")
 	private User user;
 	
-	/*//Mapping photo to the mountain
+	//Mapping photo to the mountain
 	@ManyToOne(optional = false)
 	@JoinColumn(name = "mountain_id")
-	private Mountain mountain; */
+	private Mountain mountain; 
 	
+	public Mountain getMountain() {
+		return mountain;
+	}
+
+	public void setMountain(Mountain mountain) {
+		this.mountain = mountain;
+	}
+
 	public Integer getId() {
 		return id;
 	}

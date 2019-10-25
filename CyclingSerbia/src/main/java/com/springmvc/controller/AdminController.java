@@ -31,6 +31,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 import com.springmvc.model.FileBucket;
+import com.springmvc.model.Mountain;
 import com.springmvc.model.Photo;
 import com.springmvc.model.User;
 import com.springmvc.model.UserProfile;
@@ -160,8 +161,8 @@ public class AdminController {
 	
 	
 	//Method that provides form for photo upload
-	@RequestMapping(value = "/panel-add-photo", method = RequestMethod.GET)
-	public String uploadPage(ModelMap model) {
+	@RequestMapping(value = "/panel-add-photo-{id}", method = RequestMethod.GET)
+	public String uploadPage(@PathVariable int id, ModelMap model) {
 		System.out.println("adding photo");
 		User admin = userService.findUserByEmail(getPrincipal());
 		model.addAttribute("user", admin);
@@ -173,14 +174,16 @@ public class AdminController {
 		return "photo-upload";
 	}
 	
-	@RequestMapping(value = "/panel-add-photo", method = RequestMethod.POST)
-	private String uploadPhoto(@Valid FileBucket fileBucket, BindingResult result, ModelMap model) throws IOException {
+	@RequestMapping(value = "/panel-add-photo-{id}", method = RequestMethod.POST)
+	private String uploadPhoto(@Valid FileBucket fileBucket, BindingResult result, ModelMap model, @PathVariable int id) throws IOException {
 		System.out.println("uploading photo");
 		if(result.hasErrors()) {
 			return "photo-upload";
 		}
 		User admin = userService.findUserByEmail(getPrincipal());
-		savePhoto(fileBucket, admin);
+		Mountain mountain = mountainService.findById(id);
+		
+		savePhoto(fileBucket, admin, mountain);
 		model.addAttribute("loggedinuser", getPrincipal());
 		model.addAttribute("user", admin);
 		model.addAttribute("filename", fileBucket.getFile().getName());
@@ -217,7 +220,7 @@ public class AdminController {
 		model.addAttribute("loggedinuser", getPrincipal());
 		return "success";
 	}
-	private void savePhoto(FileBucket fileBucket, User admin) throws IOException {
+	private void savePhoto(FileBucket fileBucket, User admin, Mountain mountain) throws IOException {
 		Photo photo = new Photo();
 		
 	    MultipartFile multipartFile = fileBucket.getFile();
@@ -227,6 +230,7 @@ public class AdminController {
 		photo.setType(multipartFile.getContentType());
 		photo.setContent(multipartFile.getBytes());
 		photo.setUser(admin);
+		photo.setMountain(mountain);
 		
 		photoService.savePhoto(photo);
 	}

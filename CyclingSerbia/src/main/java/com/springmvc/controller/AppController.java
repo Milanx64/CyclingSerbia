@@ -65,6 +65,7 @@ public class AppController {
 	public String homePage(ModelMap model) {
 		List<Photo> photos = photoService.find4Photos();
 		model.addAttribute("photos", photos);
+		model.addAttribute("loggedinuser", getPrincipal());
 		return "index";
 	}
 	

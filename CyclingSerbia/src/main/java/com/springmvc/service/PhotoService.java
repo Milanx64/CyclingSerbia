@@ -2,13 +2,14 @@ package com.springmvc.service;
 
 import java.util.List;
 
+import com.springmvc.model.Mountain;
 import com.springmvc.model.Photo;
 
 public interface PhotoService {
 	
 	List<Photo> findAllPhotos();
 	
-	List<Photo> findPhotoOfMountain(int id);
+	List<Photo> findPhotoOfMountain(Mountain m);
 	
 	List<Photo> find4Photos();
 	

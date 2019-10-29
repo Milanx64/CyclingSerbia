@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.springmvc.dao.PhotoDao;
+import com.springmvc.model.Mountain;
 import com.springmvc.model.Photo;
 
 @Service("photoService")
@@ -20,9 +21,9 @@ public class PhotoServiceImpl implements PhotoService{
 		return dao.findAllPhotos();
 	}
 
-	public List<Photo> findPhotoOfMountain(int id) {
+	public List<Photo> findPhotoOfMountain(Mountain m) {
 		// TODO Auto-generated method stub
-		return null;
+		return dao.findPhotoOfMountain(m);
 	}
 
 	public Photo findByUser(int user_id) {

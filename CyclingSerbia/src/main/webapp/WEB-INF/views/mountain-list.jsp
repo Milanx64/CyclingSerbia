@@ -62,7 +62,7 @@
         </div>
         <sec:authorize access="hasRole('ADMIN')">
             <div class="well">
-                <a href="<c:url value='/newuser' />">Add New User</a>
+                <a href="<c:url value='/mountain/new-mountain' />">Add New Mountain</a>
             </div>
         </sec:authorize>
     </div>

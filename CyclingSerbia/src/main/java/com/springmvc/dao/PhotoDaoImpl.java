@@ -1,7 +1,6 @@
 package com.springmvc.dao;
 
 
-import java.io.InputStream;
 import java.util.List;
 
 import org.hibernate.Criteria;
@@ -10,7 +9,7 @@ import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
-import com.mysql.jdbc.Blob;
+import com.springmvc.model.Mountain;
 import com.springmvc.model.Photo;
 
 @Repository("photoDao")
@@ -52,9 +51,12 @@ public class PhotoDaoImpl extends AbstractDao<Integer, Photo>  implements PhotoD
 		persist(photo);
 	}
 
-	public List<Photo> findPhotoOfMountain(int id) {
+	@SuppressWarnings("unchecked")
+	public List<Photo> findPhotoOfMountain(Mountain m) {
 		// TODO Auto-generated method stub
-		return null;
+		Criteria crit = createEntityCriteria();
+		crit.add(Restrictions.eq("mountain", m));
+		return (List<Photo>)crit.list();
 	}
 
 	@SuppressWarnings("unchecked")

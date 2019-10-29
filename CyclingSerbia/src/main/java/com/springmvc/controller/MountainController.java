@@ -16,8 +16,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.springmvc.model.Mountain;
+import com.springmvc.model.Photo;
 import com.springmvc.model.Track;
 import com.springmvc.service.MountainService;
+import com.springmvc.service.PhotoService;
 import com.springmvc.service.TrackService;
 
 @Controller
@@ -30,6 +32,9 @@ public class MountainController {
 	
 	@Autowired
 	TrackService trackService;
+	
+	@Autowired
+	PhotoService photoService;
 	
 	@RequestMapping(value = "/show-all-mountains", method = RequestMethod.GET)
 	public String showAllMountains(ModelMap model) {
@@ -54,8 +59,10 @@ public class MountainController {
 	public String showMountain(@PathVariable int id, ModelMap model) {
 		Mountain mountain = mountainService.findById(id);
 		List<Track> tracks = trackService.findAllTracksOnMountain(mountain);
+		List<Photo> photos = photoService.findPhotoOfMountain(mountain);
 		mountain.setTracks(tracks);
 		model.addAttribute("mountain", mountain);
+		model.addAttribute("photos", photos);
 		model.addAttribute("loggedinuser", getPrincipal());
 		return "mountain";
 		

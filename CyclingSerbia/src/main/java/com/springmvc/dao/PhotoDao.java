@@ -4,13 +4,14 @@ package com.springmvc.dao;
 
 import java.util.List;
 
+import com.springmvc.model.Mountain;
 import com.springmvc.model.Photo;
 
 public interface PhotoDao {
 	
 	List<Photo> findAllPhotos() ;
 	
-	List<Photo> findPhotoOfMountain(int id);
+	List<Photo> findPhotoOfMountain(Mountain m);
 	
 	List<Photo> find4Mountains();
 	

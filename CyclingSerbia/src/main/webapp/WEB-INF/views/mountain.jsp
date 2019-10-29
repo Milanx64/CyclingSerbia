@@ -17,7 +17,41 @@
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-sm-12">
+			
+			<div id="demo" class="carousel slide" data-ride="carousel">
 				<h1 class="center text-serbia" id="mt">${mountain.name }</h1>
+					  <!-- Indicators -->
+					  <ul class="carousel-indicators">
+					    <li data-target="#demo" data-slide-to="0" class="active"></li>
+					    <li data-target="#demo" data-slide-to="1"></li>
+					    <li data-target="#demo" data-slide-to="2"></li>
+					  </ul>
+			    		
+						  <!-- The slideshow -->
+						<div class="carousel-inner">
+						    <c:forEach items="${photos}" var="photo">
+							<div class="carousel-item active">
+						      <img src="<c:url value='/admin/panel-show-photo-${photo.id}' />" alt="Los Angeles">
+						    </div>
+						    <div class="carousel-item">
+						       <img src="<c:url value='/admin/panel-show-photo-${photo.id}' />" alt="Los Angeles">
+						    </div>
+						    <div class="carousel-item">
+						       <img src="<c:url value='/admin/panel-show-photo-${photo.id}' />" alt="Los Angeles">
+						    </div>
+					</c:forEach>
+					  </div>
+					
+					  <!-- Left and right controls -->
+					  <a class="carousel-control-prev" href="#demo" data-slide="prev">
+					    <span class="carousel-control-prev-icon"></span>
+					  </a>
+					  <a class="carousel-control-next" href="#demo" data-slide="next">
+					    <span class="carousel-control-next-icon"></span>
+					  </a>
+					
+					</div>
+				
 				<div class="about-mt">
 					<p class="mt-about-text">${mountain.description }<p>		
 				</div>

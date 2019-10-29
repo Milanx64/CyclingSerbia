@@ -25,10 +25,10 @@
         <a class="nav-link" href="<c:url value='/' />">Home <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="<c:url value='mountain/show-all-mountains' />">Mountains</a>
+        <a class="nav-link" href="<c:url value='/mountain/show-all-mountains' />">Mountains</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="<c:url value='mountain/show-all-tracks' /> ">Tracks</a>
+        <a class="nav-link" href="<c:url value='/mountain/show-all-tracks' /> ">Tracks</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="<c:url value='/login' />" >Login</a>

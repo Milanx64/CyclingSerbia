@@ -15,6 +15,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "photos")
 public class Photo {
+	
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	

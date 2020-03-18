@@ -18,6 +18,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -26,18 +27,23 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import com.springmvc.model.Mountain;
 import com.springmvc.model.Photo;
 import com.springmvc.model.User;
+import com.springmvc.model.UserProfile;
 import com.springmvc.service.MountainService;
 import com.springmvc.service.PhotoService;
+import com.springmvc.service.UserProfileService;
 import com.springmvc.service.UserService;
 
 
 @Controller
 @RequestMapping("/")
-@SessionAttributes("role")
+@SessionAttributes("roles")
 public class AppController {
 	
 	@Autowired
 	UserService userService;
+	
+	@Autowired
+	UserProfileService userProfileService;
 	
 	@Autowired
 	PhotoService photoService;
@@ -191,6 +197,11 @@ public class AppController {
 			username = principal.toString();
 		}
 		return username;
+	}
+	
+	@ModelAttribute("roles")
+	private List<UserProfile> initializeProfiles(){
+		return userProfileService.findAll();
 	}
 	
 	

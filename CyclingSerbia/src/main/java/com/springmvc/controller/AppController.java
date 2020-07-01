@@ -26,10 +26,12 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.springmvc.model.Mountain;
 import com.springmvc.model.Photo;
+import com.springmvc.model.Region;
 import com.springmvc.model.User;
 import com.springmvc.model.UserProfile;
 import com.springmvc.service.MountainService;
 import com.springmvc.service.PhotoService;
+import com.springmvc.service.RegionService;
 import com.springmvc.service.UserProfileService;
 import com.springmvc.service.UserService;
 
@@ -52,6 +54,9 @@ public class AppController {
 	MountainService mountainService;
 	
 	@Autowired
+	RegionService regionService;
+	
+	@Autowired
 	PersistentTokenBasedRememberMeServices persistentTokenBaseRememberMeService;
 	
 	@Autowired
@@ -70,8 +75,19 @@ public class AppController {
 	@RequestMapping(value = {"/", "/home"}, method = RequestMethod.GET)
 	public String homePage(ModelMap model) {
 		List<Photo> photos = photoService.find4Photos();
+		List<Mountain> mountains = mountainService.findAll();
+		List<Region> regions = regionService.findAll();
+		for(Mountain mon:mountains) {
+			System.out.println(mon.getName());
+		}
+		model.addAttribute("mountains", mountains);
 		model.addAttribute("photos", photos);
+		model.addAttribute("regions", regions);
 		model.addAttribute("loggedinuser", getPrincipal());
+		if(getPrincipal() != null) {
+			model.addAttribute("loggedin", true);
+		}
+		
 		return "index";
 	}
 	
@@ -113,6 +129,9 @@ public class AppController {
 		model.addAttribute("user", user);
 		model.addAttribute("edit", false);
 		model.addAttribute("loggedinuser", getPrincipal());
+		if(getPrincipal() != null) {
+			model.addAttribute("loggedin", true);
+		}
 		return "registration";
 	}
 	
@@ -121,6 +140,9 @@ public class AppController {
 	public String saveUser(@Valid User user, BindingResult result, ModelMap model) {
 		if(result.hasErrors()) {
 			System.out.println("Error creating user");
+			if(getPrincipal() != null) {
+				model.addAttribute("loggedin", true);
+			}
 			return "registration";
 		}
 		//make shore that user has unique email
@@ -134,6 +156,9 @@ public class AppController {
 		userService.saveUser(user);
 		model.addAttribute("success", "User " + user.getFirstname()+ " " + user.getLastname() + "created successfully");
 		model.addAttribute("loggedinuser", getPrincipal());
+		if(getPrincipal() != null) {
+			model.addAttribute("loggedin", true);
+		}
 		return "registrationsuccess";
 	}
 	
@@ -153,6 +178,9 @@ public class AppController {
 	@RequestMapping(value = "/access-denied", method = RequestMethod.POST)
 	public String accessDeniedUserPage(ModelMap model) {
 		model.addAttribute("loggedinuser", getPrincipal());
+		if(getPrincipal() != null) {
+			model.addAttribute("loggedin", true);
+		}
 		return "access-denied";
 	}
 	
@@ -177,6 +205,18 @@ public class AppController {
 		}
 		
 		return "redirect:/login?logout";
+	}
+	
+	//About page
+	@RequestMapping(value = "/about", method = RequestMethod.GET)
+	public String about(ModelMap model) {
+		return "about";
+	}
+	
+	//Contact page
+	@RequestMapping(value = "/contact", method = RequestMethod.GET)
+	public String contact(ModelMap model) {
+		return "contact";
 	}
 
 	private boolean isCurrentAuthenticationAnonymous() {

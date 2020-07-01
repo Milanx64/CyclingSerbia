@@ -28,9 +28,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
 	PersistentTokenRepository tokenRepository;
 	
 	String [] access = {"/admin/panel", "/admin/panel-create-new",
-			"/admin/panel-edit-admin-*", "/admin/panel-upload-photo" 
-			
-			, "/admin/panel-list-all-users", "/admin/panel-delete-user-*",
+			"/admin/panel-edit-admin-*", "/admin/panel-upload-photo", 
+			"/admin/panel-list-all-users", "/admin/panel-delete-user-*",
 			"/admin/panel-delete-admin-*"};
 	
 	@Autowired

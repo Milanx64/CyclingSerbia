@@ -1,5 +1,7 @@
 package com.springmvc.model;
 
+import java.util.Arrays;
+
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -33,9 +35,10 @@ public class Photo {
 	private byte[] content;
 		
 	//mapping photo to the user
-	@ManyToOne(optional = false)
+	@ManyToOne( optional = false)
 	@JoinColumn(name = "user_id")
 	private User user;
+	
 	
 	//Mapping photo to the mountain
 	@ManyToOne(optional = false)
@@ -99,6 +102,69 @@ public class Photo {
 	}
 
 	
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + Arrays.hashCode(content);
+		result = prime * result + ((description == null) ? 0 : description.hashCode());
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime * result + ((mountain == null) ? 0 : mountain.hashCode());
+		result = prime * result + ((name == null) ? 0 : name.hashCode());
+		result = prime * result + ((type == null) ? 0 : type.hashCode());
+		result = prime * result + ((user == null) ? 0 : user.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Photo other = (Photo) obj;
+		if (!Arrays.equals(content, other.content))
+			return false;
+		if (description == null) {
+			if (other.description != null)
+				return false;
+		} else if (!description.equals(other.description))
+			return false;
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
+			return false;
+		if (mountain == null) {
+			if (other.mountain != null)
+				return false;
+		} else if (!mountain.equals(other.mountain))
+			return false;
+		if (name == null) {
+			if (other.name != null)
+				return false;
+		} else if (!name.equals(other.name))
+			return false;
+		if (type == null) {
+			if (other.type != null)
+				return false;
+		} else if (!type.equals(other.type))
+			return false;
+		if (user == null) {
+			if (other.user != null)
+				return false;
+		} else if (!user.equals(other.user))
+			return false;
+		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "Photo [id=" + id + ", name=" + name + ", description=" + description + ", type=" + type + ", content="
+				+ Arrays.toString(content) + ", user=" + user + ", mountain=" + mountain + "]";
+	}
 
 	
 	

@@ -83,6 +83,9 @@ public class AdminController {
 		User user = userService.findUserByEmail(getPrincipal());
 		model.addAttribute("loggedinuser", getPrincipal());
 		model.addAttribute("user", user);
+		if(getPrincipal() != null) {
+			model.addAttribute("loggedin", true);
+		}
 		return "admin";
 	}
 	
@@ -93,6 +96,9 @@ public class AdminController {
 		model.addAttribute("user", admin);
 		model.addAttribute("edit", false);
 		model.addAttribute("loggedinuser", getPrincipal());
+		if(getPrincipal() != null) {
+			model.addAttribute("loggedin", true);
+		}
 		return "registration";
 	}
 	//Method for handliing admin creatino
@@ -100,7 +106,10 @@ public class AdminController {
 	public String create(@Valid User user, @PathVariable int id, BindingResult result, ModelMap model) {
 		if(result.hasErrors()) {
 			System.out.println("Error creating admin");
-			model.addAttribute("");
+			model.addAttribute("loggedinuser", getPrincipal());
+			if(getPrincipal() != null) {
+				model.addAttribute("loggedin", true);
+			}
 			return "registration";
 		}
 		
@@ -108,6 +117,9 @@ public class AdminController {
 		model.addAttribute("user", user);
 		model.addAttribute("success", "Admin :" + user.getFirstname() + user.getLastname() + "created successfully");
 		model.addAttribute("loggedinuser", getPrincipal());
+		if(getPrincipal() != null) {
+			model.addAttribute("loggedin", true);
+		}
 		return "registration";
 	}
 	//Method to edit admin account
@@ -118,9 +130,15 @@ public class AdminController {
 			model.addAttribute("user", admin);
 			model.addAttribute("edit", true);
 			model.addAttribute("loggedinuser", getPrincipal());
+			if(getPrincipal() != null) {
+				model.addAttribute("loggedin", true);
+			}
 			return "registration";
 		} else {
 			model.addAttribute("loggedinuser", getPrincipal());
+			if(getPrincipal() != null) {
+				model.addAttribute("loggedin", true);
+			}
 			return "access-denied";
 		}
 		
@@ -133,6 +151,10 @@ public class AdminController {
 	public String listAllUsers(ModelMap model) {
 		List<User> users = userService.findAllUsers();
 		model.addAttribute("users", users);
+		model.addAttribute("loggedinuser", getPrincipal());
+		if(getPrincipal() != null) {
+			model.addAttribute("loggedin", true);
+		}
 		return "user-list";
 	}
 	//Method for deleting user
@@ -140,6 +162,10 @@ public class AdminController {
 	public String deleteUser(@PathVariable int id, ModelMap model) {
 		User user = userService.findUserById(id);
 		userService.deleteUser(user);
+		model.addAttribute("loggedinuser", getPrincipal());
+		if(getPrincipal() != null) {
+			model.addAttribute("loggedin", true);
+		}
 		return "user-list";
 	}
 	
@@ -148,6 +174,10 @@ public class AdminController {
 	public String deleteAdmin(@PathVariable int id, ModelMap model) {
 		User admin = userService.findUserById(id);
 		userService.deleteUser(admin);
+		model.addAttribute("loggedinuser", getPrincipal());
+		if(getPrincipal() != null) {
+			model.addAttribute("loggedin", true);
+		}
 		return "success";
 	}
 	
@@ -156,6 +186,9 @@ public class AdminController {
 	@RequestMapping( value = "/access-denied", method = RequestMethod.GET)
 	public String accessDeniedPage(ModelMap model) {
 		model.addAttribute("loggedinuser", getPrincipal());
+		if(getPrincipal() != null) {
+			model.addAttribute("loggedin", true);
+		}
 		return "access-denied";
 	}
 	
@@ -171,6 +204,9 @@ public class AdminController {
         model.addAttribute("fileBucket", fileModel);
         model.addAttribute("loggedinuser", getPrincipal());
         System.out.println("username " + getPrincipal());
+        if(getPrincipal() != null) {
+			model.addAttribute("loggedin", true);
+		}
 		return "photo-upload";
 	}
 	
@@ -187,8 +223,29 @@ public class AdminController {
 		model.addAttribute("loggedinuser", getPrincipal());
 		model.addAttribute("user", admin);
 		model.addAttribute("filename", fileBucket.getFile().getName());
+		model.addAttribute("success", "Photo for mountain " + mountain.getName() + " added successfully");
+		model.addAttribute("link", "/mountain/show-all-mountains");
+		model.addAttribute("loggedinuser", getPrincipal());
+		if(getPrincipal() != null) {
+			model.addAttribute("loggedin", true);
+		}
 		return "success";
 	
+	}
+	
+	private void savePhoto(FileBucket fileBucket, User admin, Mountain mountain) throws IOException {
+		Photo photo = new Photo();
+		
+	    MultipartFile multipartFile = fileBucket.getFile();
+	    
+		photo.setName(multipartFile.getOriginalFilename());
+		photo.setDescription(fileBucket.getDescription());
+		photo.setType(multipartFile.getContentType());
+		photo.setContent(multipartFile.getBytes());
+		photo.setUser(admin);
+		photo.setMountain(mountain);
+		
+		photoService.savePhoto(photo);
 	}
 	
 	
@@ -218,22 +275,12 @@ public class AdminController {
 		photoService.deletePhoto(p);
 		model.addAttribute("success", "Photo deleted successfuly");
 		model.addAttribute("loggedinuser", getPrincipal());
+		if(getPrincipal() != null) {
+			model.addAttribute("loggedin", true);
+		}
 		return "success";
 	}
-	private void savePhoto(FileBucket fileBucket, User admin, Mountain mountain) throws IOException {
-		Photo photo = new Photo();
-		
-	    MultipartFile multipartFile = fileBucket.getFile();
-	    
-		photo.setName(multipartFile.getOriginalFilename());
-		photo.setDescription(fileBucket.getDescription());
-		photo.setType(multipartFile.getContentType());
-		photo.setContent(multipartFile.getBytes());
-		photo.setUser(admin);
-		photo.setMountain(mountain);
-		
-		photoService.savePhoto(photo);
-	}
+	
 	
 	
 	

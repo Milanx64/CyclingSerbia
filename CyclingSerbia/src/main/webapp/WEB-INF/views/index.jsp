@@ -1,81 +1,69 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <%@ page isELIgnored="false" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<!DOCTYPE html>
 <html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-        <title>Cycling Serbia Home</title>
-        <link href="<c:url value='/static/css/bootstrap.css' />"  rel="stylesheet"></link>
-        <link href="<c:url value='/static/css/app.css' />" rel="stylesheet"></link>
-        <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.css" />
-        
-        
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-    </head>
-<body>
-	<div class="container-fluid">
-		<%@include file="nav.jsp" %>
-		<div class="row">
-			<div class="col-sm-12">
-				
-				
-				<div id="demo" class="carousel slide" data-ride="carousel">
+<head>
+ <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=yes">
+  <meta name="description" content="">
+  <meta name="author" content="">
 
-					  <!-- Indicators -->
-					  <ul class="carousel-indicators">
-					    <li data-target="#demo" data-slide-to="0" class="active"></li>
-					    <li data-target="#demo" data-slide-to="1"></li>
-					    <li data-target="#demo" data-slide-to="2"></li>
-					  </ul>
-					  
-						  <!-- The slideshow -->
-						<div class="carousel-inner">
-						    <div class="carousel-item active">
-						      <img src="<c:url value='/static/photos/mtb2.jpg' />" alt="Los Angeles">
-						    </div>
-						    <div class="carousel-item">
-						       <img src="<c:url value='/static/photos/mtb3.jpg' />" alt="Los Angeles">
-						    </div>
-						    <div class="carousel-item">
-						       <img src="<c:url value='/static/photos/planina.jpg' />" alt="Los Angeles">
-						    </div>
-					  </div>
-					
-					  <!-- Left and right controls -->
-					  <a class="carousel-control-prev" href="#demo" data-slide="prev">
-					    <span class="carousel-control-prev-icon"></span>
-					  </a>
-					  <a class="carousel-control-next" href="#demo" data-slide="next">
-					    <span class="carousel-control-next-icon"></span>
-					  </a>
-					
-					</div>
-					<h1 class="center text-serbia">Cycling Serbia</h1>
-					
-					<div class="about">
-						<p class="about-text">Lorem ipsum dolor sit amet 
-						consectetur adipisicing elit. Cupiditate sequi ea
-						 vero tempora earum magni nesciunt, consectetur neque
-						  corrupti at itaque. Provident distinctio hic 
-						  , voluptatem at iste velit neque eum!</p>
-					</div>
-					<hr>
-					<h3 class="center text-serbia" id="destination-text">Places to see</h3>
-					<div class="to-see">
-						<c:forEach items="${photos}" var="photo">
-							<div class="img-holder">
-							 	<img alt="not found" src="<c:url value='/admin/panel-show-photo-${photo.id}' />" class="img">
-							</div>
+  <title>Cycling Serbia</title>
+
+ <link href="<c:url value='/static/css/bootstrap.css' />" rel="stylesheet"></link>
+ <link href="<c:url value='/static/css/app.css' />" rel="stylesheet"></link>
+ <link href="<c:url value='/static/css/style.css'/>" rel="stylesheet"></link>
+</head>
+<body>
+	<%@include file="nav.jsp" %>
+	
+	<div class="container-fluid">
+		<div class="row">
+			<div class="cover">
+				<h1 class="text-center text-white">Welcome to Cycling Serbia</h1>
+				<h3 class="text-center text-white">All tracks in Serbia on one place</h3>
+				<form:form modelAttribute="mountain" action="mountain/show-for-" method="get" class="text-center" id="index-form" onchange="">
+					<select id="index-from-button" name="region">
+						<option value="all" class="select-option">Select Region</option>
+						<c:forEach items="${regions}" var="region">
+							<option value="${region.name}" class="select-option">${region.name}</option>
 						</c:forEach>
-					</div>
+	                    
+	                   
+					</select>
+					<input type="hidden" name="${_csrf.parameterName}"  value="${_csrf.token}" />
+					<input type="submit" class="submit-btn" value="Search"/>
+				</form:form>
+				
 			</div>
 		</div>
-		
 	</div>
-	<a href="<c:url value='/admin/panel' />">Admin</a>
+	<section id="popular">
+		<h1 class="text-center padding-2">Popular Destinations</h1>
+		<div class="container">
+			<div class="row">
+			
+				<c:forEach items="${mountains}" var="mountain">
+					<div class="col-lg-4 col-md-4 col-sm-12">
+						<div class="card h-100 ">
+          					<a href="<c:url value='/mountain/show-mountain-${mountain.id }'/>"><img class="card-img-top" src="<c:url value='/admin/panel-show-photo-${mountain.id }'/>" alt=""></a>
+          					<div class="card-body dark">
+	            				<h4 class="card-title">
+	              					<a href="<c:url value='/mountain/show-mountain-${mountain.id }'/>">${mountain.name }</a>
+	           					</h4>
+	            				<p class="card-text dark">${mountain.description }</p>
+          					 </div>
+        				 </div>
+   					</div>
+				</c:forEach>
+			</div>
+		</div>
+	</section>
+	<%@include file="footer.jsp" %>
+	 
+	<script type="text/javascript" src="<c:url value='static/js/main.js'/>"></script>
 </body>
 </html>

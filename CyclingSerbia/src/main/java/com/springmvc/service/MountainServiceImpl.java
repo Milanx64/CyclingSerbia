@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.springmvc.dao.MountainDao;
 import com.springmvc.model.Mountain;
+import com.springmvc.model.Region;
 
 @Service("mountainService")
 @Transactional
@@ -43,5 +44,10 @@ public class MountainServiceImpl implements MountainService{
 			m.setName(mountain.getName());
 			m.setDescription(mountain.getDescription());
 		}
+	}
+
+	public List<Mountain> findByRegion(Region region) {
+		
+		return dao.findByRegion(region);
 	}
 }
